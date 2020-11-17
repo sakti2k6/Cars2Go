@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>Search Results</title>
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+<script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+</head>
+
+<body>
+   
+ <h3><a class="nav-link"  href="/"><i class="fa fa-home" aria-hidden="true"></i>  Home </a></h3>
+<div class="container">
+
+    <hgroup class="mb20">
+		<h1>Search Results!!!</h1>
+        <h2 class="lead"><strong class="text-danger">{{num}}</strong> results were found in the search</h2>								
+	</hgroup>
+
+    <section class="col-xs-12 col-sm-6 col-md-12">
+        {% for car in cars %}
+		<article class="search-result row">
+			<div class="col-xs-12 col-sm-12 col-md-7 excerpet">
+                <h3><a href="{{car['link']}}" title="">{{car['year']}} {{car['make']}} {{car['model']}} , {{car['mileage']}} ({{car['price']}})</a></h3>
+                <p>{{car['trim']}}, {{car['color']}}</p>						
+                <p>{{car['location']}}</p>						
+			</div>
+			<span class="clearfix borda"></span>
+		</article>
+        {% endfor %}
+	</section>
+</div>
+</body>
+</html>

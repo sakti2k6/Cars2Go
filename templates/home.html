@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% block title %}Login Page{% endblock %}
+<p></p>
+{% block content %}
+    {% with messages = get_flashed_messages() %}
+        {% if messages %}
+            {% for msg in messages %}
+                <p>{{msg}}</p>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+<form action = "#" method = "post">
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+        <label for="validationDefault01">Make</label>
+      <input type="text" class="form-control" id="validationDefault01" placeholder="eg. Acura" name="make">
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault02">Model</label>
+      <input type="text" class="form-control" id="validationDefault02" placeholder="eg. MDX" name="model">
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault06">Location City</label>
+      <input type="text" class="form-control" id="validationDefault06" placeholder="eg Austin" value="Austin, TX" disabled>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault03">Min Year</label>
+      <input type="number" class="form-control" id="validationDefault03" placeholder="eg. 2015" name="minyear" min="1980", max ="2021">
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault04">Max Year</label>
+      <input type="number" class="form-control" id="validationDefault04" placeholder="eg. 2020" name="maxyear" min="1980", max="2021">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault03">Min Price</label>
+      <input type="number" class="form-control" id="validationDefault03" placeholder="eg. 0" name="minprice" min="0">
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault04">Max Price</label>
+      <input type="number" class="form-control" id="validationDefault04" placeholder="eg. 1000000" name="maxprice" min="0">
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault03">Min Mileage (in miles)</label>
+      <input type="number" class="form-control" id="validationDefault03" placeholder="eg. 100" name="minmiles" min="0">
+    </div>
+    <div class="col-md-3 mb-3">
+      <label for="validationDefault04">Max Mileage (in miles)</label>
+      <input type="number" class="form-control" id="validationDefault04" placeholder="eg. 1000000" name="maxmiles" min="0">
+    </div>
+  </div>
+  <button class="btn btn-primary" type="submit">SEARCH CAR</button>
+</form>
+{% endblock %}

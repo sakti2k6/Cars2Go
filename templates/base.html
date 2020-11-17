@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <title>{% block title %}{% endblock %}</title>
+</head>
+<body>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!------ Include the above in your HEAD tag ---------->
+    
+    <nav class="navbar navbar-expand-lg  border">
+    <div class="container">
+    <a class="navbar-brand" href="#"></a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarText" aria-controls="navbarText" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+    </button>
+      
+    <div class="collapse navbar-collapse"  id="navbarText">
+    <ul class="navbar-nav mr-auto">
+        <li> <h3><a class="nav-link" href="/"><i class="fa fa-home" aria-hidden="true"></i>  Search Used Car </a></li></h3>
+          </ul>
+         </div></div>
+    </nav>
+    {% block content %}
+    {% endblock %}
+</body>
+</html>
