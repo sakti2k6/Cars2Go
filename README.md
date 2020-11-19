@@ -8,8 +8,8 @@ This can be extended to more websites.
 The web crawler and scrapper are run locally and database is updated at the heroku platform.
 Information about used cars are updated once a week.
 
-<h2> Steps to setup the Web Crawler/Scrapper and running the web server on localhost </h2>
-Python Version: **3.9.0**
+<h2> Steps to setup the Web Crawler and running Web App on localhost </h2>
+Python Version: *3.9.0*
 
 1. First create a virtual enviorment
     ```
