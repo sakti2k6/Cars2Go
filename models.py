@@ -28,4 +28,4 @@ class CarsModel(carsDb.Model):
         self.timestamp = timestamp
 
     def __repr__(self):
-        return f'<car id:{self.id}, {self.year} {self.make} {self.model} ${self.price:,} ${self.color} ${self.location} ${self.mileage}>'
+        return f'<car id:{self.id}, {self.year} {self.make} {self.model} ${self.price:,} {self.color} {self.location} {self.mileage}>'

@@ -12,11 +12,10 @@ import json
 from app import app, carsDb
 from models import *
 
-headers = ({'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'})
-base_url = 'https://www.autotrader.com'
 
-
-def crawl_url(url):
+def scrapper_autotrader(url):
+    headers = ({'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'})
+    base_url = 'https://www.autotrader.com'
     res = requests.get(url, headers=headers)
     soup = BeautifulSoup(res.content, 'html.parser')
     cars = soup.find_all(name = 'div',attrs = {'data-cmp':'inventoryListing'})
@@ -61,20 +60,7 @@ def crawl_url(url):
             pprint(db_row)
         except Exception as e:
             carsDb.session.rollback()
-            print('Cant add to database..', str(e))
+            print('[ERROR] Can not add autotrader car info to database', str(e))
         finally:
             carsDb.session.close()
 
-cnt = 0
-make_model = json.load(open('./files/Autotrader_Make_Model.json','r'))
-#locations = json.load(open('./files/TrueCar_Location.json','r'))
-# Only crawl for austin location and 2018 or newer cars
-for make, models in make_model.items():
-    for model in models:
-        url = f"{base_url}/cars-for-sale/{make}/{model}/austin-tx/?numRecords=100&startYear=2020"
-        print(url)
-        time.sleep(random.uniform(0.5,1.6))
-        try:
-            crawl_url(url)
-        except Exception as e:
-            print(str(e))

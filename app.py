@@ -46,7 +46,7 @@ def home():
                     user_query[key] = 99999999
 
         user_query = json.dumps(user_query)
-        print(user_query)
+        #print(user_query)
         #flash(f"Querying for car : {query}")
         return redirect(url_for("search", query_data=user_query))
     else:

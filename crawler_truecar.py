@@ -13,19 +13,11 @@ from datetime import date
 from app import app, carsDb
 from models import *
 
-from truecar_scraper import truecar_scraper
+from scrapper_truecar import scrapper_truecar
 
-class TrueCar_Crawler:
+class crawler_truecar:
     def __init__(self):
         self.base_url = "https://www.truecar.com"
-
-    def reset_db(self):
-    #Delete all tables and create again
-        try:
-            carsDb.drop_all()
-            carsDb.create_all()
-        except Exception as e:
-            print(str(e))
 
     def crawl_url(self, url):
         headers = ({'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'})
@@ -38,7 +30,6 @@ class TrueCar_Crawler:
         #Find no of pages in the current page
         pages = soup.find_all(name = 'a',attrs = {'data-test':'paginationLink'})
         if pages:
-            #count = max(5, int(pages[-1].text)) #Crawl maximum 5 pages
             count = int(pages[-1].text)
             for i in range(2, count+1):
                 queue.append(f'{url}?page={str(i)}')
@@ -46,7 +37,7 @@ class TrueCar_Crawler:
         cnt = len(queue)
         while queue:
             nextUrl = queue.popleft()
-            truecar_scraper(nextUrl, session, headers)
+            scrapper_truecar(nextUrl, session, headers)
             pausetime = random.uniform(0.4,1.5)
             time.sleep(pausetime)
 
@@ -58,7 +49,7 @@ class TrueCar_Crawler:
         make_model = json.load(open('./files/TrueCar_Make_Model.json','r'))
         #locations = json.load(open('./files/TrueCar_Location.json','r'))
         # Only crawl for austin location
-        year = 'year-2020-max'
+        year = 'year-2020-max' #Only crawl 2020 car models
         for make, models in make_model.items():
             for model in models:
                 url = f"{self.base_url}/used-cars-for-sale/listings/{make}/{model}/{year}/location-austin-tx/"
@@ -71,8 +62,7 @@ class TrueCar_Crawler:
 
 if __name__ == "__main__":
     start_time = time.time()
-    spider = TrueCar_Crawler()
-    spider.reset_db()
+    spider = crawler_truecar()
     cnt = spider.run_spider()
     print(f"All URLs {cnt} Crawled in {time.time()-start_time} seconds")
 

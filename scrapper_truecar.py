@@ -7,7 +7,7 @@ from datetime import date
 from app import app, carsDb
 from models import *
 
-def truecar_scraper(url, session, headers):
+def scrapper_truecar(url, session, headers):
     response = session.get(url, headers = headers)
 
     print(f"Processing URL: {response.url}")
@@ -29,6 +29,8 @@ def truecar_scraper(url, session, headers):
             return
 
         year = int(car_details.find(name = 'span', attrs = {'class' : 'vehicle-card-year'}).get_text())
+        #TODO Currently only supporting 2020 cars due to database size restrictions.
+        #     Remove this line in future to support all year
         if year < 2020:
             return
 
@@ -62,5 +64,8 @@ def truecar_scraper(url, session, headers):
             carsDb.session.commit()
             pprint(db_row)
         except Exception as e:
-            print('Cant add to database..', str(e))
+            carsDb.session.rollback()
+            print('[ERROR] Can not add truecar car info to database', str(e))
+        finally:
+            carsDb.session.close()
 

@@ -9,27 +9,11 @@ import requests
 from bs4 import BeautifulSoup
 import html5lib
 
+from file_utilities import download_file, gunzip_file
+
 headers = ({'user-agent':'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/85.0.4183.102 Safari/537.36'})
 base_url = 'https://www.autotrader.com'
 
-
-def download_file(url, prefix):
-    local_filename = prefix + url.split('/')[-1]
-    with requests.get(url, stream=True) as r:
-        with open(local_filename, 'wb') as f:
-            shutil.copyfileobj(r.raw, f, length=16*1024*1024)
-
-    return local_filename
-
-def gunzip_file(compress_file):
-    uncompress_file = compress_file.strip('.gz')
-    #print(uncompress_file)
-    with gzip.open(compress_file, 'rb') as f_in:
-        with open(uncompress_file, 'wb') as f_out:
-            shutil.copyfileobj(f_in, f_out)
-
-    os.remove(compress_file)
-    return uncompress_file
 
 def download_robots_txt(url):
     robot = url + '/robots.txt'
